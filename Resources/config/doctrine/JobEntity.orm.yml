@@ -1,0 +1,66 @@
+TyHand\BackgroundProcessBundle\Entity\JobEntity:
+    type: entity
+    table: background_job_queue
+    repositoryClass: TyHand\BackgroundProcessBundle\Repository\JobEntityRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        jobClass:
+            column: job_class
+            type: text
+            nullable: false
+        jobClassRecordId:
+            column: job_class_record_id
+            type: integer
+            nullable: true
+        parameters:
+            column: parameters
+            type: array
+            nullable: true
+        pid:
+            column: pid
+            type: integer
+            nullable: true
+        createdWho:
+            column: created_who
+            type: text
+            nullable: false
+        createdWhen:
+            column: created_when
+            type: datetime
+            nullable: false
+        updatedWho:
+            column: updated_who
+            type: text
+            nullable: true
+        updatedWhen:
+            column: updated_when
+            type: datetime
+            nullable: true
+        outputFile:
+            column: output_file
+            type: string
+            nullable: true
+        unitsToProcess:
+            column: units_to_process
+            type: integer
+            nullable: true
+        unitsProcessed:
+            column: units_processed
+            type: integer
+            nullable: true
+
+    oneToMany:
+        statuses:
+            targetEntity: JobStatusEntity
+            mappedBy: job
+    oneToOne:
+        currentStatus:
+            targetEntity: JobStatusEntity
+            joinColumn:
+                name: current_status_id
+                referencedColumnName: id
+                nullable: false

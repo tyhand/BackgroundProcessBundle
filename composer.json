@@ -1,0 +1,13 @@
+{
+    "name": "tyhand/background-process-bundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "description": "A basic bundle to provide some background process tools without requiring anything beyond vanilla php and symfony",
+    "autoload": {
+        "psr-0": { "TyHand\\BackgroundProcessBundle": "" }
+    },
+    "target-dir": "TyHand/BackgroundProcessBundle",
+    "require": {
+        "symfony/symfony": ">=2.3.0"
+    }
+}

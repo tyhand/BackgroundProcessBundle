@@ -1,0 +1,5 @@
+TyHandBackgroundProcessBundle_Status_getStatus:
+    pattern: /status/{jobId}
+    defaults: { _controller: 'TyHandBackgroundProcessBundle:Status:getStatus' }
+    requirements:
+        jobId: \d+

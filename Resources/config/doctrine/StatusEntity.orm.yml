@@ -1,0 +1,24 @@
+TyHand\BackgroundProcessBundle\Entity\StatusEntity:
+    type: entity
+    table: background_status
+    repositoryClass: TyHand\BackgroundProcessBundle\Repository\StatusEntityRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        shortName:
+            column: short_name
+            type: string
+            length: 16
+            nullable: false
+        longName:
+            column: long_name
+            type: string
+            length: 64
+            nullable: false
+        terminating:
+            column: terminating
+            type: boolean
+            nullable: false

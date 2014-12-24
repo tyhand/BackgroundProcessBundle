@@ -1,0 +1,10 @@
+services:
+    tyhand_background_process.job_factory:
+        class: TyHand\BackgroundProcessBundle\Service\JobFactory
+        arguments: [ @doctrine ]
+    tyhand_background_process.job_manager:
+        class: TyHand\BackgroundProcessBundle\Service\JobManager
+        arguments: [ @doctrine, @security.context, @tyhand_background_process.job_factory ]
+    tyhand_background_process.job_launcher:
+        class: TyHand\BackgroundProcessBundle\Service\JobLauncher
+        arguments: [ @kernel, @tyhand_background_process.job_manager ]

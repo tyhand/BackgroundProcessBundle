@@ -1,0 +1,33 @@
+TyHand\BackgroundProcessBundle\Entity\JobStatusEntity:
+    type: entity
+    table: background_job_status
+    repositoryClass: TyHand\BackgroundProcessBundle\Repository\JobStatusEntityRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        date:
+            column: date
+            type: datetime
+            nullable: false
+        message:
+            column: message
+            type: text
+            nullable: true
+
+    manyToOne:
+        job:
+            targetEntity: JobEntity
+            inversedBy: statuses
+            joinColumn:
+                name: job_id
+        status:
+            targetEntity: StatusEntity
+            joinColumn:
+                name: status_id
+
+    uniqueConstraints:
+        background_job_status__job_id__status_id__ukey:
+          columns: [ job_id, status_id ]
