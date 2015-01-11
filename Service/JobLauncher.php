@@ -139,18 +139,16 @@ class JobLauncher
      */
     protected function launchWin(AbstractJob $job) {
         //Construct the command string
-        $cmd = 'php ../app/console ' . $job->getCommandString();
+        $cmd = 'start /B app\console ' . $job->getCommandString();
         if (null !== $job->getOutputFile()) {
-            $cmd =  $cmd . ' > ' . $job->getOutputFile();
+            $cmd = $cmd . ' > ' . $job->getOutputFile();
         }
-
-        //Uses the WScript Shell work around (NOTE: this requires the php path variable to be set)
-        $WshShell = new \COM("WScript.Shell");
-        $oExec = $WshShell->Run($cmd, 0, false);
-
-        //return 1
-        //@TODO: determine whether process ids exist for windows and if they can be obtained here
-        return 1;
+        
+        //Launch
+        pclose(popen($cmd, 'r'));
+        
+        //Return 0 for now @TODO find way to get pid
+        return 0;
     }
 
 
