@@ -139,16 +139,24 @@ class JobLauncher
      */
     protected function launchWin(AbstractJob $job) {
         //Construct the command string
-        $cmd = 'start /B app\console ' . $job->getCommandString();
+        //$cmd = 'start /B php.exe ' . $job->getParametersAsString(); // Doesn't work
+        $cmd = 'start /B php.exe ..\app\console blackfish:budget:create_snapshot --job-entity-id=' . $job->getEntityId();
+        
+
+        // This works to redirect output, if log directory is IIS writeable 
+        //$cmd = 'php.exe ..\app\console blackfish:budget:create_snapshot --job-entity-id=' . $job->getEntityId() . ' > c:\windows\temp\test.php';
+        
         if (null !== $job->getOutputFile()) {
             $cmd = $cmd . ' > ' . $job->getOutputFile();
         }
-        
+
+        //$cmdWorking = 'php.exe ..\app\console do:sc:va --env=dev > c:\windows\temp\test2.php'; //working
+
         //Launch
         pclose(popen($cmd, 'r'));
-        
+                      
         //Return 0 for now @TODO find way to get pid
-        return 0;
+        return 1;
     }
 
 
